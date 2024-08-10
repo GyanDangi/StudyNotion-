@@ -31,7 +31,7 @@ async function sendVerificationMail(email,otp){
 		console.log("ERROR WHILE SENDING EMAIL:",error);
 	}
 }
-
+// db me store krne se phle mail send kr rhe hai:
 otpSchema.pre("save",async function(next){
 	await sendVerificationMail(this.email,this.otp);
 	next();
