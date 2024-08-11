@@ -1,4 +1,4 @@
-const Tags=require('../Models/tags');
+const Category=require('../Models/Category');
 
 
 exports.createTags=async(req,res)=>{
@@ -15,7 +15,7 @@ exports.createTags=async(req,res)=>{
 		}
 
 		// create entry in db:
-		const tagsDetails = await Tags.create({
+		const tagsDetails = await Category.create({
 			name:name,
 			description:description,
 		});
@@ -41,7 +41,7 @@ exports.createTags=async(req,res)=>{
 
 exports.ShowAllTags = async (req,res) => {
 	try {
-		const allTags = await Tags.find({},{name:true,description:true})
+		const allTags = await Category.find({},{name:true,description:true})
 		return res.status(200).json({
 			success:true,
 			message:"All tags fetched Successfully", 

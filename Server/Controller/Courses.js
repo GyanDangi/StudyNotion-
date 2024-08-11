@@ -1,5 +1,5 @@
 const User =require('../Models/user');
-const Tags =require('../Models/tags');
+const Category =require('../Models/Category');
 const Course=require('../Models/course');
 const {uploadImageToCloudinary}=require('../Utils/UploadImage');
 
@@ -34,7 +34,7 @@ exports.createCourse=async (req,res) => {
 		}
 
 		// check given tag is valid or not:
-		const tagDetails = await Tags.findById(tag);
+		const tagDetails = await Category.findById(tag);
 		if(!tagDetails){
 			return res.status(403).json({
 				success:false,
