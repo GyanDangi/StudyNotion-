@@ -6,6 +6,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const cookie = require('cookie-parser');
 const mailSender = require("../Utils/mailSender");
+require("dotenv").config();
 
 
 
@@ -34,6 +35,9 @@ exports.sendOTP = async (req, res) => {
 
     // step:04 check where otp is unique or not:
     const result = await OTP.findOne({ otp: otp });
+	console.log("Result is Generate OTP Func");
+		console.log("OTP", otp);
+		console.log("Result", result);
 
     while (result) {
       otp = otpgenerator(6, {
@@ -41,13 +45,12 @@ exports.sendOTP = async (req, res) => {
         lowerCaseAlphabets: false,
         specialChars: false,
       });
-      result = await OTP.findOne({ otp: otp });
     }
 
     // otp ki entry store in database:
     const otppayload = { email, otp };
     const otpBody = await OTP.create(otppayload);
-    console.log(otpBody);
+    console.log("OTP Body",otpBody);
 
     res.status(200).json({
       success: true,
@@ -127,6 +130,9 @@ exports.signUp = async(req,res)=>{
 
 		// step:06 Password hashing:
 		const hashPassword = await bcrypt.hash(password,10);
+		// Create the user
+		let approved = "";
+		approved === "Instructor" ? (approved = false) : (approved = true);
 
 
 		const profileDetail = await Profile.create({
@@ -143,7 +149,8 @@ exports.signUp = async(req,res)=>{
 			email,
 			password:hashPassword,
 			phoneNumber,
-			accountType,
+			accountType:accountType,
+			approved:approved,
 			additionalDetail:profileDetail._id,
 			image:`https://api.dicebear.com/5.x/initials/svg?seed=${firstName} ${lastName}`
 		})
@@ -186,7 +193,7 @@ exports.login = async(req,res)=>{
 		}
 
 		// password matched:
-		if(bcrypt.compare(password,user.password)){
+		if(await bcrypt.compare(password, user.password)){
 			const payload = {
 				email:user.email,
 				id:user.id,
@@ -194,7 +201,7 @@ exports.login = async(req,res)=>{
 			}
 
 			const token = jwt.sign(payload,process.env.JWT_SECRET,{
-				expiresIn:"2h",
+				expiresIn:"24h",
 			})
 			user.token =token
 			user.password=undefined;
@@ -207,7 +214,7 @@ exports.login = async(req,res)=>{
 				success:true,
 				token,
 				user,
-				message:"logged In"
+				message:"User logged In successfully"
 			})
 		}
 		else{
@@ -226,52 +233,75 @@ exports.login = async(req,res)=>{
 
 
 // change password:
-exports.changePass= async(req,res)=>{
+exports.changePassword= async(req,res)=>{
 	try {
-		// step:01 fetch old password from db:
-		const {password}=req.body;
-		// validation:
-		if(!password || password.length==0){
-			return res.status(402).json({
-				success:false,
-				message:"enter valid password"
-			})
+		// Get user data from req.user
+		const userDetails = await User.findById(req.user.id);
+
+		// Get old password, new password, and confirm new password from req.body
+		const { oldPassword, newPassword, confirmNewPassword } = req.body;
+
+		// Validate old password
+		const isPasswordMatch = await bcrypt.compare(
+			oldPassword,
+			userDetails.password
+		);
+		if (!isPasswordMatch) {
+			// If old password does not match, return a 401 (Unauthorized) error
+			return res
+				.status(401)
+				.json({ success: false, message: "The password is incorrect" });
 		}
 
-		const updatePassword = await User.findOne({email});
-		let newpass;
-		if(updatePassword.password===password){
-			updatePassword.password=newpass;
+		// Match new password and confirm new password
+		if (newPassword !== confirmNewPassword) {
+			// If new password and confirm new password do not match, return a 400 (Bad Request) error
+			return res.status(400).json({
+				success: false,
+				message: "The password and confirm password does not match",
+			});
 		}
 
-		const user= await User.create({
-			password:user.updatePassword,
-		})
-		// send verification email:
-		async function sendVerificationMail(email){
-			try {
-		
-				const mailResponse  = await mailSender(email,"Verifcation email from StudyNotion",``);
-				console.log("email send successfully",mailResponse);
-		
-			} catch (error) {
-				console.log("ERROR WHILE SENDING EMAIL:",error);
-			}
+		// Update password
+		const encryptedPassword = await bcrypt.hash(newPassword, 10);
+		const updatedUserDetails = await User.findByIdAndUpdate(
+			req.user.id,
+			{ password: encryptedPassword },
+			{ new: true }
+		);
+
+		// Send notification email
+		try {
+			const emailResponse = await mailSender(
+				updatedUserDetails.email,
+				passwordUpdated(
+					updatedUserDetails.email,
+					`Password updated successfully for ${updatedUserDetails.firstName} ${updatedUserDetails.lastName}`
+				)
+			);
+			console.log("Email sent successfully:", emailResponse.response);
+		} catch (error) {
+			// If there's an error sending the email, log the error and return a 500 (Internal Server Error) error
+			console.error("Error occurred while sending email:", error);
+			return res.status(500).json({
+				success: false,
+				message: "Error occurred while sending email",
+				error: error.message,
+			});
 		}
 
-		const info=post("save",async function(next){
-			await sendVerificationMail(this.email,this.otp);
-			next();
-		})
-		return res.status(200).json({
-			success:true,
-			message:"Password Updated",
-		})
-
-		
-
+		// Return success response
+		return res
+			.status(200)
+			.json({ success: true, message: "Password updated successfully" });
 	} catch (error) {
-		
+		// If there's an error updating the password, log the error and return a 500 (Internal Server Error) error
+		console.error("Error occurred while updating password:", error);
+		return res.status(500).json({
+			success: false,
+			message: "Error occurred while updating password",
+			error: error.message,
+		});
 	}
 }
 

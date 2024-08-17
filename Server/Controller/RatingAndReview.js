@@ -109,6 +109,7 @@ exports.allRating = async (req, res ) => {
 		return res.status(200).json({
 			success:true,
 			message:"All rating and reviews fetched successfully",
+			data:allReviews,
 		})							
 
 		

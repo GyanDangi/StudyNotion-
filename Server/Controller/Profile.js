@@ -1,10 +1,11 @@
 const Profile= require('../Models/Profile');
 const User = require('../Models/user');
+const { uploadImageToCloudinary } = require("../utils/imageUploader");
 
 exports.updateProfile = async (req,res ) => {
 	try {
 		// get data
-		const {dateOfBirth,about,contactNumber,gender}= req.body;
+		const {dateOfBirth="",about="",contactNumber,gender}= req.body;
 		// get userId
 		const id= req.user.id;
 		// validate
@@ -15,7 +16,7 @@ exports.updateProfile = async (req,res ) => {
 			})
 		}
 		// find Profile
-		const userDetails = await User.findById({id});
+		const userDetails = await User.findById(id);
 		const profileID =userDetails.additionalDetail;
 		const profileDetails = await Profile.findById(profileID);
 		// update profile
@@ -46,9 +47,9 @@ exports.deleteAccount = async (req,res ) => {
 	try {
 		// get id
 		const id = req.user.id;
-		const userDetails= await User.find({id});
+		const userDetails= await User.findById({id});
 		// check validity
-		if(!id){
+		if(!id || !userDetails){
 			return res.status(404).json({
 				success:false,
 				message:"User not found",
@@ -89,9 +90,11 @@ exports.getAllUserDetails= async (req,res ) => {
 			})
 		}
 		const userDetails = await User.findById(id).populate("additionalDetails").exec();
+		console.log(userDetails);
 		return res.status(200).json({
 			success:true,
-			message:"User data feched successfully"
+			message:"User data feched successfully",
+			data:userDetails,
 		})
 	} catch (error) {
 		return res.status(401).json({
@@ -100,3 +103,65 @@ exports.getAllUserDetails= async (req,res ) => {
 		})
 	}
 }
+
+
+exports.updateDisplayPicture = async (req, res) => {
+    try {
+      const displayPicture = req.files.displayPicture
+      const userId = req.user.id
+      const image = await uploadImageToCloudinary(
+        displayPicture,
+        process.env.FOLDER_NAME,
+        1000,
+        1000
+      )
+      console.log(image)
+      const updatedProfile = await User.findByIdAndUpdate(
+        { _id: userId },
+        { image: image.secure_url },
+        { new: true }
+      )
+      res.send({
+        success: true,
+        message: `Image Updated successfully`,
+        data: updatedProfile,
+      })
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        message: error.message,
+      })
+    }
+};
+
+
+
+exports.updateDisplayPicture = async (req, res) => {
+    try {
+      const displayPicture = req.files.displayPicture
+      const userId = req.user.id
+      const image = await uploadImageToCloudinary(
+        displayPicture,
+        process.env.FOLDER_NAME,
+        1000,
+        1000
+      )
+      console.log(image)
+      const updatedProfile = await User.findByIdAndUpdate(
+        { _id: userId },
+        { image: image.secure_url },
+        { new: true }
+      )
+      res.send({
+        success: true,
+        message: `Image Updated successfully`,
+        data: updatedProfile,
+      })
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        message: error.message,
+      })
+    }
+};
+

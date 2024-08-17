@@ -61,9 +61,11 @@ exports.isStudent = async(req,res,next)=>{
 		})
 	}
 }
+
+
 // isInstructor:
 
-exports.isStudent = async(req,res,next)=>{
+exports.isInstructor = async(req,res,next)=>{
 	try {
 		
 
@@ -86,7 +88,7 @@ exports.isStudent = async(req,res,next)=>{
 // isAdmin
 
 
-exports.isStudent = async(req,res,next)=>{
+exports.isAdmin = async(req,res,next)=>{
 	try {
 		
 

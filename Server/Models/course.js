@@ -30,6 +30,10 @@ const courseSchema = new mongoose.Schema({
 	price:{
 		type:Number,
 	},
+	tag:{
+		type:[String],
+		required:true,
+	},
 	thumbnail:{
 		type:String,
 	},
@@ -42,6 +46,14 @@ const courseSchema = new mongoose.Schema({
 		required:true,
 		ref:"User"
 	}],
+	instructions:{
+		type:[String]
+	},
+	status:{
+		type:String,
+		enum:['Darft','Published']
+	}
+
 })
 
 

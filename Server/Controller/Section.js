@@ -1,7 +1,5 @@
 const Section = require('../Models/Section');
 const Course = require('../Models/course');
-const { findByIdAndDelete } = require('../Models/user');
-
 
 exports.createSection = async (req, res) => {
 	try {
@@ -25,7 +23,13 @@ exports.createSection = async (req, res) => {
 				}
 			},
 			{new:true}
-		).populate("newSection")
+		).populate({
+			path:'courseContent',
+			populate:{
+				path:'subSection'
+			}
+
+		}).exec()
 		// populate both section and subsection in populated course
 		console.log(updatedCourse);
 		
@@ -73,8 +77,11 @@ exports.updateSection = async (req,res) => {
 		})
 
 	} catch (error) {
-		
-	}
+		console.error("Error updating section:", error);
+		res.status(500).json({
+			success: false,
+			message: "Internal server error",
+	})}
 }
 
 // delete Section:

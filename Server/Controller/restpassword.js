@@ -7,28 +7,29 @@ exports.resetPasswordToken = async (req, res) => {
     // get email:
     const { email } = req.body;
     // validate email:
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email:email });
 
     if (!user) {
       return res.status(502).json({
         success: false,
-        message: "Your email is not registerd with us",
+        message: `This ${email} is not registerd with us enter  a valid email`,
       });
     }
     // generate token
-    const token = crypto.randomUUID();
+	const token = crypto.randomBytes(20).toString("hex");
 
     // update user and adding token and expiration time:
     const updatedDetails = await User.findOneAndUpdate(
-      { email },
-      { token: token, resetPasswordExpires: 5 * 60 * 1000 }
+      { email:email },
+      { token: token, resetPasswordExpires: Date.now()+ 3600000 },
+	  {new:true}
     );
-
+	console.log(updatedDetails);
     // create URL
     const URL = `http://localhost:3000/update-password/${token}`;
 
     //send mail containing the url:
-    await mailSender(email, "Password Reset Link", `Password Reset URL:${URL}`);
+    await mailSender(email, "Password Reset Link", `Password Reset URL:${URL} please click the url to reset your password`);
 
     // return response:
     return res.status(200).json({

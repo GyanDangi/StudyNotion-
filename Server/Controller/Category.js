@@ -1,4 +1,5 @@
-const Category=require('../Models/Category');
+
+const Category =require('../Models/Category');
 
 
 exports.createCategory=async(req,res)=>{
@@ -15,15 +16,15 @@ exports.createCategory=async(req,res)=>{
 		}
 
 		// create entry in db:
-		const tagsDetails = await Category.create({
+		const CateforyDetails = await Category.create({
 			name:name,
 			description:description,
 		});
-		console.log(tagsDetails)
+		console.log(CateforyDetails)
 
 		return res.status(200).json({
 			success:true,
-			message:"tags created Successfully",
+			message:"Category created Successfully",
 		})
 
 
@@ -41,15 +42,16 @@ exports.createCategory=async(req,res)=>{
 
 exports.ShowAllCategories = async (req,res) => {
 	try {
-		const allTags = await Category.find({},{name:true,description:true})
+		const allCategories = await Category.find({},{name:true,description:true})
 		return res.status(200).json({
 			success:true,
+			data:allCategories,
 			message:"All tags fetched Successfully", 
 		})
 		
 	} catch (error) {
 			console.log(error)
-			res.status(402).json({
+			res.status(502).json({
 				success:false,
 				message:"ERROR IN FINDING Tags"
 			})
@@ -82,11 +84,19 @@ exports.categoryPageDetails =async (req, res ) => {
 		// return response 
 		return res.status(200).json({
 			success:true,
+			data:{
+				selectedCategory,
+				differentCategories,
+			},
 			message:"Category fetched successfully",
 			
 		})
 
 	} catch (error) {
-		
+		console.log(error);
+        return res.status(500).json({
+            success:false,
+            message:error.message,
+        });
 	}
 }

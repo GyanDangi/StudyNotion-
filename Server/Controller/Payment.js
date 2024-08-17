@@ -3,6 +3,7 @@ const {instance}= require('../Config/razorpay');
 const Course= require('../Models/course');
 const User = require('../Models/user');
 const mailSender= require('../Utils/mailSender');
+const {courseEnrollmentEmail} = require("../mail/templates/courseEnrollmentEmail");
 // courese enrollmenet email yaha pr dalna hai:
 
 
@@ -24,7 +25,7 @@ exports.capturePayments =async (req,res ) => {
 		// validate the course details:
 		let course;
 		  try {
-				course= await Course.findById({courseId});
+				course= await Course.findById(courseId);
 				if(!course){
 					res.status(402).json({
 						success:false,
@@ -33,7 +34,7 @@ exports.capturePayments =async (req,res ) => {
 				}
 
 				// user already paid for the same cousrse
-				const uid= new mongoose.Types.ObjectId({userId});
+				const uid = new mongoose.Types.ObjectId({userId});
 				if(course.StudentEnrolled.includes(uid)){
 					return res.status(502).json({
 						success:false,
@@ -141,6 +142,7 @@ exports.verifySignature =async (req, res ) => {
 														'Congratulations',
 														'congratulations for new course Purchase'
 				)
+				console.log(emailResponse);
 				return res.status(200).json({
 					success:true,
 					message:"signature varified and course added"
