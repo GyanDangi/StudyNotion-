@@ -1,9 +1,9 @@
 const bcrypt = require("bcrypt");
-const User = require("../models/User");
+const User = require("../Models/User");
 const OTP = require("../models/OTP");
 const jwt = require("jsonwebtoken");
 const otpGenerator = require("otp-generator");
-const mailSender = require("../utils/mailSender");
+const mailSender = require("../Utils/mailSender");
 const { passwordUpdated } = require("../mail/templates/passwordUpdate");
 const Profile = require("../models/Profile");
 require("dotenv").config();
@@ -128,7 +128,7 @@ exports.login = async (req, res) => {
 		}
 
 		// Find user with provided email
-		const user = await User.findOne({ email }).populate("additionalDetails");
+		const user = await User.findOne({ email }).populate("additionalDetail");
 
 		// If user not found with provided email
 		if (!user) {

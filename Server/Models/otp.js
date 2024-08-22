@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 // const SendmailTransport = require('nodemailer/lib/sendmail-transport');
 const mailSender = require('../Utils/mailSender');
+const emailTemplate = require('../mail/templates/emailVerificationTemplate');
 
 const otpSchema = new mongoose.Schema({
 	email:{
@@ -24,7 +25,11 @@ const otpSchema = new mongoose.Schema({
 async function sendVerificationMail(email,otp){
 	try {
 
-		const mailResponse  = await mailSender(email,"Verifcation email from StudyNotion", otp);
+		const mailResponse  = await mailSender(
+			email,
+			"Verifcation email from StudyNotion",
+			emailTemplate(otp),	
+		 );
 		console.log("email send successfully",mailResponse);
 
 	} catch (error) {
