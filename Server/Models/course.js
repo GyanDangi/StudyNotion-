@@ -37,7 +37,7 @@ const courseSchema = new mongoose.Schema({
 	thumbnail:{
 		type:String,
 	},
-	Category:{
+	category:{
 		type:mongoose.Schema.Types.ObjectId,
 		ref:"Category",
 	},
@@ -51,7 +51,7 @@ const courseSchema = new mongoose.Schema({
 	},
 	status:{
 		type:String,
-		enum:['Darft','Published']
+		enum:["Draft","Published"]
 	}
 
 })

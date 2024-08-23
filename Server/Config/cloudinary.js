@@ -10,5 +10,6 @@ exports.cloudinaryConnect = () => {
 		});
 	} catch (error) {
 		console.log(error);
+		console.log("unable to upload image to cloudinary");
 	}
 };

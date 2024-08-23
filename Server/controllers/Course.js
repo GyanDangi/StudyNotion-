@@ -1,5 +1,5 @@
 const Course = require("../models/Course");
-const Category = require("../models/Category");
+const Category = require("../Models/Category");
 const User = require("../Models/User");
 const { uploadImageToCloudinary } = require("../utils/imageUploader");
 // Function to create a new course
@@ -161,11 +161,11 @@ exports.getCourseDetails = async (req, res) => {
                                             {
                                                 path:"instructor",
                                                 populate:{
-                                                    path:"additionalDetails",
+                                                    path:"additionalDetail",
                                                 },
                                             }
                                         )
-                                        .populate("category")
+                                        .populate("Category")
                                         .populate("ratingAndreviews")
                                         .populate({
                                             path:"courseContent",

@@ -10,7 +10,7 @@ require('dotenv').config();
 const database= require('./Config/database');
 const cookieParser= require('cookie-parser');	
 const cors = require('cors');
-const {cloudinaryConnect}= require('./Config/cloudinary');
+const cloudinary= require('./Config/cloudinary');
 
 const fileUpload = require('express-fileupload');
 
@@ -38,7 +38,7 @@ app.use(
 
 
 // cloudinary se connect:
-cloudinaryConnect();
+cloudinary.cloudinaryConnect();
 
 // routes moute:
 app.use('/api/v1/auth',userRoute);

@@ -5,12 +5,12 @@ require('dotenv').config();
 // Method for updating a profile
 exports.updateProfile = async (req, res) => {
 	try {
-		const { dateOfBirth = "", about = "", contactNumber } = req.body;
+		const { dateOfBirth="", about = " ", contactNumber } = req.body;
 		const id = req.user.id;
 
 		// Find the profile by id
 		const userDetails = await User.findById(id);
-		const profile = await Profile.findById(userDetails.additionalDetails);
+		const profile = await Profile.findById(userDetails.additionalDetail);
 
 		// Update the profile fields
 		profile.dateOfBirth = dateOfBirth;
@@ -70,7 +70,7 @@ exports.getAllUserDetails = async (req, res) => {
 	try {
 		const id = req.user.id;
 		const userDetails = await User.findById(id)
-			.populate("additionalDetails")
+			.populate("additionalDetail")
 			.exec();
 		console.log(userDetails);
 		res.status(200).json({
@@ -89,7 +89,7 @@ exports.getAllUserDetails = async (req, res) => {
 exports.updateDisplayPicture = async (req, res) => {
     try {
       const displayPicture = req.files.displayPicture
-      const userId = req.user.id
+      const userId = req.user.id;
       const image = await uploadImageToCloudinary(
         displayPicture,
         "Gyan",
@@ -97,6 +97,7 @@ exports.updateDisplayPicture = async (req, res) => {
         1000
       )
       console.log(image)
+	  console.log("you reach here");
       const updatedProfile = await User.findByIdAndUpdate(
         { _id: userId },
         { image: image.secure_url },

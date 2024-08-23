@@ -1,17 +1,18 @@
-const Category = require("../models/Category");
+const Category = require('../Models/Category');
 
 exports.createCategory = async (req, res) => {
 	try {
 		const { name, description } = req.body;
 		if (!name) {
-			return res
-				.status(400)
-				.json({ success: false, message: "All fields are required" });
+            return res
+            .status(400)
+            .json({ success: false, message: "All fields are required" });
 		}
 		const CategorysDetails = await Category.create({
-			name: name,
+            name: name,
 			description: description,
 		});
+        // console.log("reached here");
 		console.log(CategorysDetails);
 		return res.status(200).json({
 			success: true,
@@ -19,8 +20,8 @@ exports.createCategory = async (req, res) => {
 		});
 	} catch (error) {
 		return res.status(500).json({
-			success: true,
-			message: error.message,
+			success: false,
+			message: "unable to create a category",
 		});
 	}
 };
