@@ -154,6 +154,12 @@ exports.getCourseDetails = async (req, res) => {
     try {
             //get id
             const {courseId} = req.body;
+			if(!courseId){
+				return res.status(403).json({
+					status:false,
+					message:"enter valid course Id",
+				})
+			}
             //find course details
             const courseDetails = await Course.find(
                                         {_id:courseId})
@@ -165,8 +171,8 @@ exports.getCourseDetails = async (req, res) => {
                                                 },
                                             }
                                         )
-                                        .populate("Category")
-                                        .populate("ratingAndreviews")
+                                        .populate("category")
+                                        // .populate("ratingAndreviews")
                                         .populate({
                                             path:"courseContent",
                                             populate:{
