@@ -1,6 +1,6 @@
-// # Add this to file package.json -> script-> to run backend and frontend -concurrently
-// #  also install "npm i concurrently" in front end package
+// # install "npm i concurrently" in front end package.json
 // npm i concurrently
+// #Also Add this to file package.json -> script-> to run backend and frontend -concurrently
 // # "server": "cd server && npm run dev",
 // #     "dev": "concurrently -n \"client,server\" -c \"bgBlue,bgYellow\" \"npm start\" \"npm run server\""
   
