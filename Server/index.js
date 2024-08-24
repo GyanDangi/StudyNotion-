@@ -1,3 +1,11 @@
+// # Add this to file package.json -> script-> to run backend and frontend -concurrently
+// #  also install "npm i concurrently" in front end package
+// npm i concurrently
+// # "server": "cd server && npm run dev",
+// #     "dev": "concurrently -n \"client,server\" -c \"bgBlue,bgYellow\" \"npm start\" \"npm run server\""
+  
+
+
 const express = require('express');
 const app = express();
 
