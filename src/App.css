@@ -8,3 +8,10 @@ html, body{
 	overflow-x:  hidden;
 	
 }
+.homevideoShadow{
+ box-shadow: 20px 20px 2px whitesmoke;
+ 
+}
+.homepage_bg{
+	background: url('../src/assets/Images/bghome.svg');
+}
