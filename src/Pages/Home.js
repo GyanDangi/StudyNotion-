@@ -15,9 +15,9 @@ const Home = () => {
     <div>
       {/* Section 01  */}
 
-      <div className="w-11/12 relative mx-auto flex flex-col  items-center text-white justify-between max-w-maxContent">
+      <div className="w-11/12 relative mx-auto flex flex-col items-start lg:items-center md:items-center text-white justify-between max-w-maxContent">
         <NavLink to={"/signup"}>
-          <div className="group mt-16 p-1 lg:items-center sm:items-start rounded-full bg-richblack-800 font-bold  text-richblack-300 transition-all duration-200 hover:scale-95 w-fit">
+          <div className="group mt-16 p-1 flex flex-col items-start lg:items-center rounded-full bg-richblack-800 font-bold  text-richblack-300 transition-all duration-200 hover:scale-95 ">
             <div className=" flex flex-row gap-4 items-center rounded-full px-10 py-[5px] group-hover:bg-richblack-900 ">
               <p>Become an Instructor</p>
               <FaArrowRight />
@@ -25,12 +25,12 @@ const Home = () => {
           </div>
         </NavLink>
 
-        <div className=" text-center font-semibold text-4xl mt-6">
+        <div className=" text-left lg:text-center font-semibold text-4xl mt-6">
           Empower Your Future Growth with
           <HighlightText text={" Coding Skills"} />
         </div>
 
-        <div className=" mt-4 text-richblack-300 text-center font-semibold text-lg ">
+        <div className=" text-left  mt-4 text-richblack-300 lg:text-center font-semibold text-lg ">
           With our online coding courses, you can learn at your own pace, from
           anywhere in the world, and get access to a wealth of resources,
           including hands-on projects, quizzes, and personalized feedback from
@@ -48,7 +48,7 @@ const Home = () => {
         </div>
 
         {/* Video  */}
-        <div className=" flex flex-col  my-12 homevideoShadow border-white">
+        <div className=" flex flex-col  my-12  homevideoShadow">
           <video muted autoPlay loop>
             <source src={Banner} type="video/mp4" />
           </video>
@@ -58,11 +58,11 @@ const Home = () => {
 
         <div className=" w-[100%]">
           <CodeBlock
-            position={" lg:flex-row sm:flex-col"}
+            position={"flex-row"}
             heading={
               <div className=" text-4xl font-semibold">
                 Unlock your
-                <HighlightText text={"coding potential"} />
+                <HighlightText text={"coding potential "} />
                 with Our online courses
               </div>
             }
@@ -100,7 +100,7 @@ const Home = () => {
             heading={
               <div className=" text-4xl font-semibold">
                 Start
-                <HighlightText text={"Coding in seconds"} />
+                <HighlightText text={"Coding in seconds "} />
                 with Our online courses
               </div>
             }
@@ -152,14 +152,14 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="w-11/12 max-w-maxContent flex flex-col mx-auto items-center justify-between gap-7  mt-[130px]">
-          <div className=" flex flex-row gap-5">
-            <div className=" text-4xl font-bold w-[45%]">
+        <div className="w-11/12 max-w-maxContent flex flex-col mx-auto items-center justify-between gap-7 mt-7 lg:mt-[130px]">
+          <div className=" flex flex-col items-center lg:flex-row gap-5">
+            <div className=" text-4xl font-bold lg:w-[45%] w-[100%]">
               Get the Skills You need for a
               <HighlightText text={"job that is in demand"} />
             </div>
 
-            <div className=" flex flex-col gap-7 w-[45%] text-lg items-start">
+            <div className=" flex flex-col gap-10 mb-5 lg:w-[45%] w-[100%] text-xl items-start">
               <div>
                 The modern StudyNotion is the dictates its own terms. Today, to
                 be a competitive specialist requires more than professional

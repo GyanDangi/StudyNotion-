@@ -8,10 +8,10 @@ const CodeBlock = ({
 	position, heading, subheading, ctabtn1, ctabtn2, codeblock, codecolor, 
 }) => {
 	return (
-		<div className={`flex ${position} my-20 gap-10 justify-between`}>
+		<div className={`flex code_container flex-col lg:flex-row ${position} my-20 gap-10 justify-between`}>
 			
 			{/* section 1 */}
-			<div className=' w-[50%]  flex flex-col gap-8'>
+			<div className=' lg:w-[50%] w-[100%] flex flex-col items-center gap-8'>
 				{heading}
 				<div className=' text-richblack-300 font-bold '>
 					{subheading}
@@ -35,7 +35,7 @@ const CodeBlock = ({
 			</div>
 
 			{/* section:02 */}
-			<div className=' h-fit flex flex-row w-[50%] text-xl '>
+			<div className=' h-fit flex flex-row lg:w-[50%] md:w-[100%] w-[100%] text-xl '>
 
 				<div className=' text-center flex flex-col w-[10%] text-richblack-500 font-inter font-bold '>
 					<p>1</p>
@@ -52,7 +52,7 @@ const CodeBlock = ({
 
 				</div>
 
-				<div className={`w-[90%] code_container  flex flex-col pl-3  font-bold font-mono ${codecolor} `}>
+				<div className={`w-[90%]  flex flex-col pl-3  font-bold font-mono ${codecolor} `}>
 					<TypeAnimation
 						sequence={[codeblock,5000,""]}
 						repeat={Infinity}
