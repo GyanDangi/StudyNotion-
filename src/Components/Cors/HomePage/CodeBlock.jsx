@@ -52,9 +52,9 @@ const CodeBlock = ({
 
 				</div>
 
-				<div className={`w-[90%] flex flex-col gap-2 font-bold font-mono ${codecolor} `}>
+				<div className={`w-[90%] code_container  flex flex-col pl-3  font-bold font-mono ${codecolor} `}>
 					<TypeAnimation
-						sequence={[codeblock,1000,""]}
+						sequence={[codeblock,5000,""]}
 						repeat={Infinity}
 						omitDeletionAnimation={true}
 						cursor={true}

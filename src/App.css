@@ -15,3 +15,26 @@ html, body{
 .homepage_bg{
 	background: url('../src/assets/Images/bghome.svg');
 }
+.InstructorShadow{
+	box-shadow: -20px -20px  white;
+}
+
+.code_container {
+	position: relative;
+	z-index: 1; /* Ensure the container is above the gradient */
+	background-color: #0E1A2D3D; /* Background color of your container */
+	/* Add other styles for your container here */
+   }
+
+.code_container::before {
+	content: '';
+	position: absolute;
+	top: 30%;
+	left: 30%;
+	width: 400px;
+	height: 400px;
+	background: radial-gradient(circle, rgba(199, 77, 7, 0.45), rgba(255, 0, 150, 0) 90%);
+	filter: blur(50px);
+	transform: translate(-50%, -50%);
+	z-index: -1; /* Position the gradient behind the container */
+   }

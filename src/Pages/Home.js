@@ -7,6 +7,8 @@ import Banner from "../assets/Images/banner.mp4";
 import CodeBlock from "../Components/Cors/HomePage/CodeBlock";
 import LearninglanguageSection from "../Components/Cors/HomePage/LearninglanguageSection";
 import TimelineSection from "../Components/Cors/HomePage/TimelineSection";
+import InstructorSection from "../Components/Cors/HomePage/InstructorSection";
+import Footer from "../Components/Cors/HomePage/Footer";
 
 const Home = () => {
   return (
@@ -15,7 +17,7 @@ const Home = () => {
 
       <div className="w-11/12 relative mx-auto flex flex-col  items-center text-white justify-between max-w-maxContent">
         <NavLink to={"/signup"}>
-          <div className="group mt-16 p-1 mx-auto rounded-full bg-richblack-800 font-bold  text-richblack-300 transition-all duration-200 hover:scale-95 w-fit">
+          <div className="group mt-16 p-1 lg:items-center sm:items-start rounded-full bg-richblack-800 font-bold  text-richblack-300 transition-all duration-200 hover:scale-95 w-fit">
             <div className=" flex flex-row gap-4 items-center rounded-full px-10 py-[5px] group-hover:bg-richblack-900 ">
               <p>Become an Instructor</p>
               <FaArrowRight />
@@ -56,7 +58,7 @@ const Home = () => {
 
         <div className=" w-[100%]">
           <CodeBlock
-            position={" lg:flex-row"}
+            position={" lg:flex-row sm:flex-col"}
             heading={
               <div className=" text-4xl font-semibold">
                 Unlock your
@@ -170,24 +172,27 @@ const Home = () => {
             </div>
           </div>
 
-		<TimelineSection/>
+          <TimelineSection />
 
-		<LearninglanguageSection/>
+          <LearninglanguageSection />
         </div>
-		<div>
-
-		</div>
-
-
-			
-
+        <div></div>
       </div>
-
-
 
       {/* Section 03  */}
 
+      <div className=" w-11/12 mx-auto max-w-maxContent flex flex-col justify-between bg-richblack-900">
+        <InstructorSection />
+
+        <h2 className=" text-center text-4xl font-bold text-white  mt-10">
+          Reveiws from other learners
+        </h2>
+      </div>
+
       {/* Footer      */}
+      <div className=" bg-richblack-800 flex flex-col mt-16">
+            <Footer/>
+      </div>
     </div>
   );
 };

@@ -9,7 +9,7 @@ const LearninglanguageSection = () => {
   return (
     <div className=' mt-[130px]'>
 
-		<div className=' flex flex-col items-center'>
+		<div className=' flex flex-col items-center mb-32'>
 
 			<div className=' text-center text-4xl font-semibold'>
 			Your swiss knife for 
