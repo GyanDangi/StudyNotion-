@@ -5,7 +5,7 @@ import CTAButton from '../HomePage/Button'
 
 
 const CodeBlock = ({
-	position, heading, subheading, ctabtn1, ctabtn2, codeblock, codecolor, 
+	position, heading, subheading, ctabtn1, ctabtn2, codeblock, codecolor, color
 }) => {
 	return (
 		<div className={`flex code_container flex-col lg:flex-row ${position} my-20 gap-10 justify-between`}>
@@ -52,7 +52,7 @@ const CodeBlock = ({
 
 				</div>
 
-				<div className={`w-[90%]  flex flex-col pl-3  font-bold font-mono ${codecolor} `}>
+				<div className={`w-[90%]  flex flex-col pl-3 text-[12px] lg:text-xl lg:font-bold font-mono ${codecolor} ${color}`}>
 					<TypeAnimation
 						sequence={[codeblock,5000,""]}
 						repeat={Infinity}

@@ -8,7 +8,8 @@ import CodeBlock from "../Components/Cors/HomePage/CodeBlock";
 import LearninglanguageSection from "../Components/Cors/HomePage/LearninglanguageSection";
 import TimelineSection from "../Components/Cors/HomePage/TimelineSection";
 import InstructorSection from "../Components/Cors/HomePage/InstructorSection";
-import Footer from "../Components/Cors/HomePage/Footer";
+import Footer from "../Components/Cors/Common/Footer";
+import ExploreMore from "../Components/Cors/HomePage/ExploreMore";
 
 const Home = () => {
   return (
@@ -16,10 +17,10 @@ const Home = () => {
       {/* Section 01  */}
 
       <div className="w-11/12 relative mx-auto flex flex-col items-start lg:items-center md:items-center text-white justify-between max-w-maxContent">
-        <NavLink to={"/signup"}>
-          <div className="group mt-16 p-1 flex flex-col items-start lg:items-center rounded-full bg-richblack-800 font-bold  text-richblack-300 transition-all duration-200 hover:scale-95 ">
+        <NavLink to={"/signup"} className="mt-20">
+          <div className=" p-1 flex flex-col items-start lg:items-center rounded-full bg-richblack-800 font-bold  text-richblack-300 transition-all duration-200 hover:scale-95  group ">
             <div className=" flex flex-row gap-4 items-center rounded-full px-10 py-[5px] group-hover:bg-richblack-900 ">
-              <p>Become an Instructor</p>
+              <p className="text-richblack-300">Become an Instructor</p>
               <FaArrowRight />
             </div>
           </div>
@@ -39,7 +40,7 @@ const Home = () => {
 
         {/* two button */}
         <div className=" flex flex-row gap-7 mt-4">
-          <CTAButton active={true} linkto={"/singup"}>
+          <CTAButton active={true} linkto={"/signup"}>
             Learn More
           </CTAButton>
           <CTAButton active={false} linkto={"/login"}>
@@ -48,7 +49,7 @@ const Home = () => {
         </div>
 
         {/* Video  */}
-        <div className=" flex flex-col  my-12  homevideoShadow">
+        <div className=" flex flex-col  my-12  md:shadow-[25px_25px_rgba(250,250,250,1)]">
           <video muted autoPlay loop>
             <source src={Banner} type="video/mp4" />
           </video>
@@ -117,18 +118,22 @@ const Home = () => {
               linkto: "/login",
               active: false,
             }}
-            codeblock={`<!DOCTYPE html>
+            codeblock=
+            {`<!DOCTYPE html>
 							<html>
-							head><title>Example</title><linkrel="stylesheet"href="styles.css">
+							<head><title>Example</title> <link rel="stylesheet"href="styles.css">
 							/head>
-							body>
-							h1><ahref="/">Header</a>
+							<body>
+							<h1><a  href="/">Header</a>
 							/h1>
-							nav><ahref="one/">One</a><ahref="two/">Two</a><ahref="three/">Three</a>
+							<nav><a href="one/">One</a><a href="two/">Two</a><a href="three/">Three</a>
 							/nav>`}
-            codecolor={"text-yellow-25"}
+            codecolor={"text-blue-600"}
+            
           />
         </div>
+
+        <ExploreMore/>
       </div>
 
       {/* Section 02  */}
