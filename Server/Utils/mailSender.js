@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 const nodemailer = require('nodemailer');
 
 const mailSender= async(email,title,body)=>{
@@ -9,7 +9,7 @@ const mailSender= async(email,title,body)=>{
 			host:process.env.MAIL_HOST,
 			auth:{
 				user:process.env.MAIL_USER,
-				pass:process.env.MAIL_PASS
+				pass:process.env.MAIL_PASS,
 			}
 		})
 

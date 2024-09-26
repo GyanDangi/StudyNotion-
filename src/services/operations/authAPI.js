@@ -98,7 +98,9 @@ export function login(email, password, navigate) {
       if (!response.data.success) {
         throw new Error(response.data.message)
       }
-
+      if(!password){
+        toast.error("password not matched");
+      }
       toast.success("Login Successful")
       dispatch(setToken(response.data.token))
       const userImage = response.data?.user?.image
@@ -109,7 +111,7 @@ export function login(email, password, navigate) {
       navigate("/dashboard/my-profile")
     } catch (error) {
       console.log("LOGIN API ERROR............", error)
-      toast.error("Login Failed")
+      toast.error("Login Failed,Please Enter Correct Credential")
     }
     dispatch(setLoading(false))
     toast.dismiss(toastId)
@@ -121,9 +123,7 @@ export function getPasswordResetToken(email, setEmailSent) {
     const toastId = toast.loading("Loading...")
     dispatch(setLoading(true))
     try {
-      const response = await apiConnector("POST", RESETPASSTOKEN_API, {
-        email,
-      })
+      const response = await apiConnector("POST", RESETPASSTOKEN_API, {email,})
 
       console.log("RESETPASSTOKEN RESPONSE............", response)
 
@@ -134,7 +134,7 @@ export function getPasswordResetToken(email, setEmailSent) {
       toast.success("Reset Email Sent")
       setEmailSent(true)
     } catch (error) {
-      console.log("RESETPASSTOKEN ERROR............", error)
+      console.log("RESETPASSTOKEN ERROR............", error+"HI")
       toast.error("Failed To Send Reset Email")
     }
     toast.dismiss(toastId)

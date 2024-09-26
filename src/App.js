@@ -6,6 +6,8 @@ import { useState } from "react";
 import Signup from "./Pages/Signup";
 import About from "./Pages/About";
 import Navbar from './Components/Cors/Common/Navbar'
+import Forgotpassword from "./Pages/Forgotpassword";
+import UpdatePassword from "./Pages/UpdatePassword";
 
 
 function App() {
@@ -19,6 +21,8 @@ function App() {
           <Route path="/login" element={<Login/>}/>
           <Route path="/signup" element={<Signup/>}/>
           <Route path="/about" element={<About/>}/> 
+          <Route path="/forgot-password" element={<Forgotpassword/>}/> 
+          <Route path="/update-password/:id" element={<UpdatePassword/>}/> 
         </Routes>
     </div>
   );

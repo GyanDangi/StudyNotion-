@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-// const SendmailTransport = require('nodemailer/lib/sendmail-transport');
+const SendmailTransport = require('nodemailer/lib/sendmail-transport');
 const mailSender = require('../Utils/mailSender');
-const emailTemplate = require('../mail/templates/emailVerificationTemplate');
+const otpTemplate = require('../mail/templates/emailVerificationTemplate');
 
 const otpSchema = new mongoose.Schema({
 	email:{
@@ -16,7 +16,7 @@ const otpSchema = new mongoose.Schema({
 	createdAt:{
 		type:Date,
 		default:Date.now(),
-		expires:5*60
+		expires:5*60,
 	}
 });
 
@@ -28,7 +28,7 @@ async function sendVerificationMail(email,otp){
 		const mailResponse  = await mailSender(
 			email,
 			"Verifcation email from StudyNotion",
-			emailTemplate(otp),	
+			otpTemplate(otp),	
 		 );
 		console.log("email send successfully",mailResponse);
 
@@ -38,10 +38,14 @@ async function sendVerificationMail(email,otp){
 }
 // db me store krne se phle mail send kr rhe hai:
 otpSchema.pre("save",async function(next){
-	await sendVerificationMail(this.email,this.otp);
+	
+	if (this.isNew) {
+		await sendVerificationMail(this.email, this.otp);
+	}
 	next();
 })
 
 
 
-module.exports = mongoose.model("OTP",otpSchema);
+const otp = mongoose.model("OTP",otpSchema);
+module.exports =otp;
