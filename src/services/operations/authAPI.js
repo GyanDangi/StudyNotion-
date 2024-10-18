@@ -35,7 +35,14 @@ export function sendOtp(email, navigate) {
       navigate("/verify-email")
     } catch (error) {
       console.log("SENDOTP API ERROR............", error)
-      toast.error("Could Not Send OTP")
+
+      if (error.response.data.message.includes("User is Already Registered")) {
+        toast.error("User already registered. Please log in.");
+      } else if (error.message.includes("User not found")) {
+        toast.error("User not found. Please sign up first.");
+      } else {
+        toast.error("Could Not Send OTP");
+      }
     }
     dispatch(setLoading(false))
     toast.dismiss(toastId)
@@ -75,7 +82,11 @@ export function signUp(
       navigate("/login")
     } catch (error) {
       console.log("SIGNUP API ERROR............", error)
-      toast.error("Signup Failed")
+      if (error.message === "User already exists. Please sign in to continue.") {
+        toast.error("User already exists! Please log in.");
+      } else {
+        toast.error("Signup Failed. Please try again.");
+      }
       navigate("/signup")
     }
     dispatch(setLoading(false))
@@ -92,14 +103,10 @@ export function login(email, password, navigate) {
         email,
         password,
       })
-
       console.log("LOGIN API RESPONSE............", response)
 
       if (!response.data.success) {
         throw new Error(response.data.message)
-      }
-      if(!password){
-        toast.error("password not matched");
       }
       toast.success("Login Successful")
       dispatch(setToken(response.data.token))
@@ -108,10 +115,18 @@ export function login(email, password, navigate) {
         : `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.user.firstName} ${response.data.user.lastName}`
       dispatch(setUser({ ...response.data.user, image: userImage }))
       localStorage.setItem("token", JSON.stringify(response.data.token))
+      localStorage.setItem("user", JSON.stringify(response.data.user))
       navigate("/dashboard/my-profile")
     } catch (error) {
       console.log("LOGIN API ERROR............", error)
-      toast.error("Login Failed,Please Enter Correct Credential")
+      if(error.response.data.message==="User is not Registered with Us Please SignUp to Continue"){
+      toast.error("User is not Registered with Us Please SignUp to Continue")
+      navigate("/signup")
+      }
+      else if(error.response.data.message==="Password is incorrect"){
+        toast.error("Password is incorrect")
+      }
+      
     }
     dispatch(setLoading(false))
     toast.dismiss(toastId)
@@ -134,7 +149,7 @@ export function getPasswordResetToken(email, setEmailSent) {
       toast.success("Reset Email Sent")
       setEmailSent(true)
     } catch (error) {
-      console.log("RESETPASSTOKEN ERROR............", error+"HI")
+      console.log("RESETPASSTOKEN ERROR............", error)
       toast.error("Failed To Send Reset Email")
     }
     toast.dismiss(toastId)

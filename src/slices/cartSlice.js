@@ -44,9 +44,9 @@ const cartSlice = createSlice({
 
       if (index >= 0) {
         // If the course is found in the cart, remove it
-        state.totalItems--
-        state.total -= state.cart[index].price
-        state.cart.splice(index, 1)
+        state.totalItems--;
+        state.total -= state.cart[index].price;
+        state.cart.splice(index, 1);
         // Update to localstorage
         localStorage.setItem("cart", JSON.stringify(state.cart))
         localStorage.setItem("total", JSON.stringify(state.total))

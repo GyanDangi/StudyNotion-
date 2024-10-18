@@ -5,7 +5,10 @@ import about2 from "../assets/Images/aboutus2.webp";
 import about3 from "../assets/Images/aboutus3.webp";
 // import Navbar from "../Components/Cors/Common/Navbar";
 import foundinStory from '../assets/Images/FoundingStory.png'
-import Footer from '../Components/Cors/Common/Footer'
+import Footer from '../Components/Common/Footer'
+import StatsComponents from "../Components/Cors/AboutPage/StatsComponents";
+import LearningGrid from "../Components/Cors/AboutPage/LearningGrid";
+import GetInTouchForm from "../Components/Cors/AboutPage/GetInTouchForm";
 const About = () => {
   return (
     <div className="flex flex-col ">
@@ -68,28 +71,17 @@ const About = () => {
         </div>
       </div>
 
-      <div className="w-full bg-richblack-800 ">
-          <div className=" w-11/12 max-w-maxContent mt-10 mb-10 gap-4  flex flex-row justify-between mx-auto ">
-              <div className=" w-[295px] flex flex-col gap-2 text-center">
-                <h2 className="text-3xl font-semibold text-white">5K</h2>
-                <p className=" text-richblack-500">Active Students</p>
-              </div>
-              <div className=" w-[295px] flex flex-col gap-2 text-center">
-                <h2 className="text-3xl font-semibold text-white">10+</h2>
-                <p className=" text-richblack-500">Mentors</p>
-              </div>
-              <div className=" w-[295px] flex flex-col gap-2 text-center">
-                <h2 className="text-3xl font-semibold text-white">200+</h2>
-                <p className=" text-richblack-500">Courses</p>
-              </div>
-              <div className=" w-[295px] flex flex-col gap-2 text-center">
-                <h2 className="text-3xl font-semibold text-white">50+</h2>
-                <p className=" text-richblack-500">Awards</p>
-              </div>
-              
-          </div>
-      </div>
 
+      {/* Section:03 */}
+      <div className="w-full bg-richblack-800 mb-10 mt-10 ">
+          <StatsComponents/>
+      </div>
+      
+    {/* Section:04 */}
+    <div className="w-full bg-richblack-900 ">
+          <LearningGrid/>
+          <GetInTouchForm/>
+      </div>
       <Footer/>
     </div>
   );

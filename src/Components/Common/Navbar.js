@@ -1,21 +1,24 @@
 import React, { useEffect, useState } from "react";
-import logo from "../../../assets/Logo/Logo-Full-Light.png";
+import logo from "../../assets/Logo/Logo-Full-Light.png";
 import { IoIosArrowDropdownCircle } from "react-icons/io";
 
 // import { FaSearch } from "react-icons/fa";
-import { FaShoppingCart } from "react-icons/fa";
-import CTAButton from "../HomePage/Button";
+// import { FaShoppingCart } from "react-icons/fa";
+import CTAButton from "../../Components/Cors/HomePage/Button";
 import { matchPath, NavLink} from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
-import { NavbarLinks } from "../../../data/navbar-links";
+// import { NavbarLinks } from "../../../data/navbar-links";
+import {NavbarLinks} from "../../data/navbar-links"
+
 import { useSelector } from "react-redux";
-import { apiConnector } from "../../../services/apiConnector";
-import { categories } from "../../../services/apis";
+import { apiConnector } from "../../services/apiConnector";
+import { categories } from "../../services/apis";
+import ProfileDropdown from "../Cors/AuthPage/ProfileDropDown";
 const Navbar = () => {
   const { token } = useSelector((state) => state.auth);
-  const { user } = useSelector((state) => state.profile);
-  const { totalItems } = useSelector((state) => state.cart);
+  // const { user } = useSelector((state) => state.profile);
+  // const { totalItems } = useSelector((state) => state.cart);
   const location = useLocation();
 
   const [subLinks, setSublinks]= useState([]);
@@ -100,12 +103,12 @@ const Navbar = () => {
 
           <div>
             <div className=" flex flex-row gap-3 items-center text-richblack-50">
-              {user && user?.accountType !== "Instructor" && (
+              {/* {user && user?.accountType !== "Instructor" && (
                 <NavLink>
                   <FaShoppingCart className="hover:text-caribbeangreen-200 hover:scale-110" />
                   {totalItems > 0 && <span>{totalItems}</span>}
                 </NavLink>
-              )}
+              )} */}
 
               {token === null && (
                 <CTAButton active={false} linkto={"/login"}>
@@ -118,6 +121,10 @@ const Navbar = () => {
                   Sign up
                 </CTAButton>
               )}
+
+              {
+                token !== null && <ProfileDropdown/>
+              }
             </div>
           </div>
         </div>

@@ -8,7 +8,7 @@ import CodeBlock from "../Components/Cors/HomePage/CodeBlock";
 import LearninglanguageSection from "../Components/Cors/HomePage/LearninglanguageSection";
 import TimelineSection from "../Components/Cors/HomePage/TimelineSection";
 import InstructorSection from "../Components/Cors/HomePage/InstructorSection";
-import Footer from "../Components/Cors/Common/Footer";
+import Footer from "../Components/Common/Footer";
 import ExploreMore from "../Components/Cors/HomePage/ExploreMore";
 
 const Home = () => {

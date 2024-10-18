@@ -1,12 +1,12 @@
 import React from "react";
-import logo from "../../../assets/Logo/Logo-Small-Light.png";
+import logo from "../../assets/Logo/Logo-Small-Light.png";
 import { FaFacebook } from "react-icons/fa";
 import { AiFillGoogleCircle } from "react-icons/ai";
 import { FaTwitter } from "react-icons/fa6";
 import { FaYoutube } from "react-icons/fa6";
 import { FaHeart } from "react-icons/fa";
 import { FaCopyright } from "react-icons/fa";
-import { FooterLink2 } from "../../../data/footer-links";
+import { FooterLink2 } from "../../data/footer-links";
 import { NavLink } from "react-router-dom";
 
 const Footer = () => {

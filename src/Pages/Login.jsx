@@ -7,7 +7,7 @@ const Login = () => {
   return (
 
     <div className=' text-white  w-full mx-auto'>
-      <div className=' max-w-maxContent mx-auto w-11/12'>
+      <div className=' max-w-maxContent mx-auto w-11/12 select-none'>
       <Template
      title="Welcome Back"
      desc1="Build skills for today, tomorrow, and beyond. Education "

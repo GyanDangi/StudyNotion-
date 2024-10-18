@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { ACCOUNT_TYPE } from "../../../utils/constants";
 import { sendOtp } from "../../../services/operations/authAPI";
 import { setSignupData } from "../../../slices/authSlice";
-import Tab from "../Common/Tab";
+import Tab from "../../Common/Tab";
 const SignupForm = () => {
 
 	const navigate= useNavigate();
