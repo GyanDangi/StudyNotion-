@@ -16,10 +16,10 @@ const paymentRoute= require('./Routes/Payments');
 const courseRoute= require('./Routes/Course');
 
 require('dotenv').config();
-const database= require('./Config/database');
+const database= require('./config/database');
 const cookieParser= require('cookie-parser');	
 const cors = require('cors');
-const {cloudinaryConnect}= require('./Config/cloudinary');
+const {cloudinaryConnect}= require('./config/cloudinary');
 
 const fileUpload = require('express-fileupload');
 
