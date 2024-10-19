@@ -1,5 +1,5 @@
 const Profile = require("../models/Profile");
-const User = require("../Models/User");
+const User = require("../models/User");
 const { uploadImageToCloudinary } = require("../utils/imageUploader");
 require('dotenv').config();
 // Method for updating a profile
