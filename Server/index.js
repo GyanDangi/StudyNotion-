@@ -9,11 +9,11 @@
 const express = require('express');
 const app = express();
 
-const userRoute= require('./Routes/User');
-const contactUsRoute = require("./Routes/Contact");
-const profileRoute= require('./Routes/Profile');
-const paymentRoute= require('./Routes/Payments');
-const courseRoute= require('./Routes/Course');
+const userRoute= require('./routes/user');
+const contactUsRoute = require("./routes/contact");
+const profileRoute= require('./routes/profile');
+const paymentRoute= require('./routes/payment');
+const courseRoute= require('./routes/course');
 
 require('dotenv').config();
 const database= require('./config/database');

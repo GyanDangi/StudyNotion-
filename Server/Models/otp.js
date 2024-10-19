@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const SendmailTransport = require('nodemailer/lib/sendmail-transport');
-const mailSender = require('../Utils/mailSender');
+const mailSender = require('../utils/mailSender');
 const otpTemplate = require('../mail/templates/emailVerificationTemplate');
 
 const otpSchema = new mongoose.Schema({
