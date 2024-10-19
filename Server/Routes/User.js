@@ -8,7 +8,7 @@ const {
   signup,
   sendotp,
   changePassword,
-} = require("../controllers/auth")
+} = require("../controllers/auth.js")
 const {
   resetPasswordToken,
   resetPassword,
@@ -45,4 +45,4 @@ router.post("/reset-password-token", resetPasswordToken)
 router.post("/reset-password", resetPassword)
 
 // Export the router for use in the main application
-module.exports = router
+module.exports = router;

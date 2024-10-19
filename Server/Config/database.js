@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const { errorMonitor } = require('nodemailer/lib/xoauth2');
 require('dotenv').config();
 
 
