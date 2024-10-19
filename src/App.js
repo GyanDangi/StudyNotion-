@@ -58,7 +58,7 @@ function App() {
             }
           </Route>
          
-          <Route path="*" element={ <Error/>}/> 
+          {/* <Route path="*" element={ <Error/>}/>  */}
         </Routes>
     </div>
   );
